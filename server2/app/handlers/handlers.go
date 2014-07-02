@@ -8,17 +8,15 @@ import (
 )
 
 type Status struct {
-	Model *models.Status
 }
 
 func NewStatus() *Status {
-	return &Status{
-		Model: models.NewStatus(),
-	}
+	return new(Status)
 }
 
 func (s Status) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	json, err := json.Marshal(s.Model)
+	model := models.NewStatus()
+	json, err := json.Marshal(model)
 	if err != nil {
 		http.Error(w, "I die", http.StatusInternalServerError)
 	}
